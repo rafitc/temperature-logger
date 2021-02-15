@@ -34,6 +34,10 @@ def serial_ports():
     return result
 
 port = serial_ports()
+if not port:
+    print("No port is connected!!")
+    exit()
+
 i = 1
 for p in port:
     print(i,")",port)
