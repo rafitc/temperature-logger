@@ -1,6 +1,5 @@
 #include <Wire.h>
 #include "SHTSensor.h"
-#include <ArduinoJson.h>
 
 SHTSensor sht;
 // To use a specific sensor instead of probing the bus use this command:
