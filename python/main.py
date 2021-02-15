@@ -3,6 +3,9 @@ import sys
 import glob
 import hello as time
 import csv
+import os
+import time as sleep
+
 count = 0
 
 def serial_ports():
@@ -35,7 +38,10 @@ def serial_ports():
 
 port = serial_ports()
 if not port:
-    print("No port is connected!!")
+    print("No port is found!!")
+    sleep.sleep(2)
+    print("Closing")
+    sleep.sleep(1)
     exit()
 
 i = 1
@@ -48,7 +54,10 @@ port_number = int(port_number)
 if(port_number<i):
     print("Selected ", port[port_number-1])
 else:
-    print("Wrong port number choosed")
+    print("Wrong port number")
+    sleep.sleep(2)
+    print("Closing")
+    sleep.sleep(1)
     exit()
 PORT = port[port_number-1]
 
@@ -59,8 +68,11 @@ except SerialException:
     print("Serial port error!!")
 
 ser.flushInput()
+if not os.path.exists('data'):
+    print("Created a DATA Folder")
+    os.mkdir('data')
 
-with open(time.fileName(), 'w') as file:
+with open("data/"+time.fileName(), 'w', newline='') as file:
     writer = csv.writer(file)
     ser_bytes = ser.readline()
     print(ser_bytes.decode('utf-8'))
